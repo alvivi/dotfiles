@@ -120,7 +120,7 @@ let g:gitgutter_eager = 1    " runs diffs on buffer switch
 let g:gitgutter_enabled = 1  " enables gitgutter (hunks only)
 let g:gitgutter_realtime = 1 " runs diffs when stop writting
 let g:gitgutter_signs = 1    " shows signs on the gutter
-let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_added= '·'
 let g:gitgutter_sign_modified = '·'
 let g:gitgutter_sign_removed = '·'
 let g:gitgutter_sign_removed_first_line = '·'
@@ -129,6 +129,12 @@ noremap <Leader>hn :GitGutterNextHunk<CR>
 noremap <Leader>hp :GitGutterPrevHunk<CR>
 noremap <Leader>hs :GitGutterStageHunk<CR>
 noremap <Leader>hu :GitGutterUndoHunk<CR>
+
+"
+" Vim as Git tool
+"
+
+autocmd FileType gitcommit,gitrebase,gitconfig set bufhidden=delete
 
 "
 " Fugitive
@@ -165,3 +171,39 @@ noremap <Leader>sc :Ag<CR>
 noremap <Leader>se :Rg<CR>
 noremap <Leader>sf :FZF<CR>
 noremap <Leader>sg :GitFiles<CR>
+
+"
+" ALE
+"
+
+let g:airline#extensions#ale#enabled = 1
+let g:ale_close_preview_on_insert = 1
+let g:ale_completion_enabled = 1
+let g:ale_cursor_detail = 1
+let g:ale_echo_delay = 1000
+let g:ale_elixir_elixir_ls_release = '/home/alvivi/Projects/elixir-ls/release'
+let g:ale_elixir_mix_executable = '/home/alvivi/.config/nixpkgs/mix_wrapper.sh'
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_linters = {
+\   'elixir': ['elixir-ls'],
+\}
+
+nnoremap <silent> K :ALEHover<CR>
+nmap <silent> gd :ALEGoToDefinition<CR>
+nmap <silent> gds :ALEGoToDefinitionInSplit<CR>
+nmap <silent> gdt :ALEGoToDefinitionInTab<CR>
+nmap <silent> gr :ALEFindReferences<CR>
+inoremap <expr> <C-j> pumvisible() ? "\<C-N>" : "j"
+inoremap <expr> <C-k> pumvisible() ? "\<C-P>" : "k"
+
+"
+" Vim-Mix-Format
+"
+
+let g:mix_format_on_save = 1
+

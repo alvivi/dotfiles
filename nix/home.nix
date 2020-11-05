@@ -1,48 +1,96 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   nixpkgs.config = {
     allowUnfree = true;
 
     packageOverrides = pkgs: {
-      nur = import <nur> {
-        inherit pkgs;
-      };
+      nur = import <nur> { inherit pkgs; };
+      unstable = import <nixos-unstable> { };
+
+      nerdfonts-iosevka = pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; };
     };
   };
 
   home = {
     packages = with pkgs; [
       bat
+      docker
+      docker-compose
       gcolor3
+      inotify-tools
       lsd
       neovim-remote
-      nerdfonts
+      nerdfonts-iosevka
+      ngrok
+      nix-prefetch-git
       nixfmt
+      nodejs-12_x
+      openvpn
       peco
       ripgrep
       silver-searcher
       slack-dark
       spotify
+      tig
+      unstable.beam.interpreters.erlangR23
+      unstable.beam.packages.erlangR23.elixir_1_11
       xcape
       xclip
     ];
 
-    keyboard = {
-      layout = "us";
-      options = [ "eurosign:e" "ctrl:nocaps" ];
-    };
+    # keyboard = {
+    #   layout = "us";
+    #   options = [ "eurosign:e" "ctrl:nocaps" ];
+    # };
 
-    file.".local/share/applications/neovim.desktop" = {
-      text = ''
-        [Desktop Entry]
-        Encoding=UTF-8
-        Name=NeoVim
-        Exec=kitty zsh -c "xcape && nvim"
-        Icon=nvim
-        Type=Application
-        Categories=Development
-      '';
+    file = {
+      "Pictures/Wallpapers/mad_dog_jones_001.png" = {
+        source = builtins.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/alvivi/dotfiles/master/wallpapers/mad_dog_jones_001.png";
+          sha256 = "116p7w4f8n01y4jh5983a11sn3z54nz42a9318fp154ys4qhlyf5";
+        };
+      };
+      "Pictures/Wallpapers/mad_dog_jones_002.png" = {
+        source = builtins.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/alvivi/dotfiles/master/wallpapers/mad_dog_jones_002.png";
+          sha256 = "1xwbaxw9h3vgamyfskw55amn4cdp3rmk817sjmvdihi0rfk4f6mz";
+        };
+      };
+      "Pictures/Wallpapers/mad_dog_jones_003.png" = {
+        source = builtins.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/alvivi/dotfiles/master/wallpapers/mad_dog_jones_003.png";
+          sha256 = "1mvcr6lpx03ar9m9dimv19k4ff1xj97s8zsm1xhqm0034g61lycw";
+        };
+      };
+      "Pictures/Wallpapers/mad_dog_jones_004.png" = {
+        source = builtins.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/alvivi/dotfiles/master/wallpapers/mad_dog_jones_004.png";
+          sha256 = "18hyfhsl879kr0ci5rwkvvl03jmd8b8fvncd1v0arqid1drwnlnk";
+        };
+      };
+      "Pictures/Wallpapers/mad_dog_jones_005.png" = {
+        source = builtins.fetchurl {
+          url =
+            "https://raw.githubusercontent.com/alvivi/dotfiles/master/wallpapers/mad_dog_jones_005.png";
+          sha256 = "0jjjaf01zr1mph7s5bibjnn8ibjhf4bqjakfn8harb4mhak02n2p";
+        };
+      };
+      ".local/share/applications/neovim.desktop" = {
+        text = ''
+          [Desktop Entry]
+          Encoding=UTF-8
+          Name=NeoVim
+          Exec=kitty zsh -c "xcape && nvim"
+          Icon=nvim
+          Type=Application
+          Categories=Development
+        '';
+      };
     };
   };
 
@@ -53,16 +101,55 @@
     theme.name = "Adwaita-dark";
   };
 
-  services = {
-    xcape = {
-      enable = true;
-      mapExpression = { Control_L = "Escape"; };
+  dconf.settings = {
+    "org/gnome/desktop/interface" = { text-scaling-factor = 1.25; };
+
+    "org/gnome/mutter" = {
+      experimental-features = [ "scale-monitor-framebuffer" ];
+    };
+
+    "org/gnome/desktop/input-sources" = {
+      sources = lib.hm.gvariant.mkValue [
+        (lib.hm.gvariant.mkTuple [
+          (lib.hm.gvariant.mkString "xkb")
+          (lib.hm.gvariant.mkString "es")
+        ])
+
+        (lib.hm.gvariant.mkTuple [
+          (lib.hm.gvariant.mkString "xkb")
+          (lib.hm.gvariant.mkString "us")
+        ])
+      ];
     };
   };
+
+  # xsession = {
+  #   enable = true;
+  # };
+
+  # services = {
+  #   clipmenu = { enable = true; };
+
+  #   random-background = {
+  #     enable = true;
+  #     enableXinerama = true;
+  #     imageDirectory = "%h/Pictures/Wallpapers";
+  #   };
+
+  #   redshift = {
+  #     enable = true;
+  #     brightness = {
+  #       day = "1";
+  #       night = "0.8";
+  #     };
+  #     provider = "geoclue2";
+  #   };
+  # };
 
   programs = {
     firefox = {
       enable = true;
+      enableGnomeExtensions = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         sidebery
         ublock-origin
@@ -70,6 +157,7 @@
       ];
       profiles.alvivi = {
         settings = {
+          "layout.css.devPixelsPerPx" = "1.25";
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
         userChrome = ''
@@ -83,15 +171,26 @@
 
     git = {
       enable = true;
-      # TODO: Check if available on update
-      # delta.enable = true;
+      delta.enable = true;
       lfs.enable = true;
       userEmail = "alvivi@gmail.com";
       userName = "Alvaro Vilanova Vidal";
       signing = {
-        key = "D32AF8A4C4B4595E";
+        key = "9A8F06C7265E82FB";
         signByDefault = true;
       };
+      extraConfig = {
+        diff = { tool = "nvr"; };
+        "difftool \"nvr\"" = { cmd = "nvr -s -d $LOCAL $REMOTE"; };
+        merge = { tool = "nvr"; };
+        "mergetool \"nvr\"" = {
+          cmd =
+            "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='";
+        };
+      };
+      ignores = [
+        ".elixir_ls"
+      ];
     };
 
     # TODO: Check if available on update
@@ -116,7 +215,18 @@
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;
-      plugins = with pkgs.vimPlugins; [
+      plugins = let
+        vim-mix-format = pkgs.vimUtils.buildVimPlugin {
+          name = "vim-mix-format";
+          src = pkgs.fetchFromGitHub {
+            owner = "mhinz";
+            repo = "vim-mix-format";
+            rev = "cbb63e65a423ea63444a5d1b41e51d1fcec5f962";
+            sha256 = "037fbmcj9dfj89jd2xa1xv55baqvws85xpjmypgr3kx7y183l0b7";
+          };
+        };
+      in with pkgs.vimPlugins; [
+        ale
         emmet-vim
         fzf-vim
         nerdcommenter
@@ -125,8 +235,10 @@
         vim-airline-themes
         vim-devicons
         vim-easymotion
+        vim-elixir
         vim-fugitive
         vim-gitgutter
+        vim-mix-format
         vim-nix
         vim-one
         vim-rhubarb
