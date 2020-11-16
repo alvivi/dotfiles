@@ -305,7 +305,7 @@
         gc = "git commit";
         gco = "git checkout";
         gcoi =
-          "git branch --all | peco | sed 's/remotes/origin///g' | xargs git checkout";
+          "git branch --all | peco | sed 's/remotes\\/origin\\///g' | xargs git checkout";
         gd = "git diff";
         gdi = "gsina | xargs -o git diff";
         gf = "git fetch --all";
