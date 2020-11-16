@@ -180,17 +180,16 @@
         signByDefault = true;
       };
       extraConfig = {
-        diff = { tool = "nvr"; };
         "difftool \"nvr\"" = { cmd = "nvr -s -d $LOCAL $REMOTE"; };
-        merge = { tool = "nvr"; };
         "mergetool \"nvr\"" = {
           cmd =
             "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='";
         };
+        diff = { tool = "nvr"; };
+        merge = { tool = "nvr"; };
+        pull.ff = "only";
       };
-      ignores = [
-        ".elixir_ls"
-      ];
+      ignores = [ ".elixir_ls" ];
     };
 
     # TODO: Check if available on update
