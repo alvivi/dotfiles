@@ -267,7 +267,6 @@
       initExtra = ''
         autoload -U promptinit; promptinit
         prompt pure
-
         if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
           if [ -x "$(command -v nvr)" ]; then
             alias nvim=nvr
@@ -275,7 +274,6 @@
             alias nvim='echo "No nesting!"'
           fi
         fi
-
         function gsina {
           git status --porcelain \
           | awk '{ if (substr($0, 0, 2) ~ /^[ ?].$/) print $0 }' \
