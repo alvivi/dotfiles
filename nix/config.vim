@@ -182,7 +182,6 @@ let g:ale_completion_enabled = 1
 let g:ale_cursor_detail = 1
 let g:ale_echo_delay = 1000
 let g:ale_elixir_elixir_ls_release = '/home/alvivi/Projects/elixir-ls/release'
-let g:ale_elixir_mix_executable = '/home/alvivi/.config/nixpkgs/mix_wrapper.sh'
 let g:ale_fix_on_save = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
