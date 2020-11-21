@@ -15,8 +15,6 @@
   home = {
     packages = with pkgs; [
       bat
-      docker
-      docker-compose
       gcolor3
       gitAndTools.gh
       inotify-tools
@@ -36,6 +34,8 @@
       tig
       unstable.beam.interpreters.erlangR23
       unstable.beam.packages.erlangR23.elixir_1_11
+      unstable.docker
+      unstable.docker-compose
       xcape
       xclip
     ];
