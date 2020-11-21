@@ -187,7 +187,11 @@
             "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='";
         };
         diff = { tool = "nvr"; };
-        merge = { tool = "nvr"; };
+        merge = {
+          tool = "nvr";
+          conflictstyle = "diff3";
+        };
+        mergetool = { prompt = false; };
         pull.ff = "only";
       };
       ignores = [ ".elixir_ls" ];
