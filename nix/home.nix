@@ -18,6 +18,7 @@
       docker
       docker-compose
       gcolor3
+      gitAndTools.gh
       inotify-tools
       lsd
       neovim-remote
