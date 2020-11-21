@@ -36,6 +36,7 @@
       unstable.beam.packages.erlangR23.elixir_1_11
       unstable.docker
       unstable.docker-compose
+      vscode
       xcape
       xclip
     ];
