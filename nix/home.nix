@@ -154,6 +154,7 @@
       enableGnomeExtensions = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         sidebery
+        stylus
         ublock-origin
         vimium
       ];
