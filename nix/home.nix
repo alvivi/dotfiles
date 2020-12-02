@@ -262,6 +262,7 @@
         enable = true;
         theme = "pygmalion";
       };
+      # TODO: Home manager supports prezto since 2020/10, check it out.
       plugins = [{
         name = "zsh-prezto";
         src = pkgs.fetchFromGitHub {
