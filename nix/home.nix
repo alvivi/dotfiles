@@ -14,16 +14,23 @@
 
   home = {
     packages = with pkgs; [
+      #xcape
       bat
+      cloc
+      discord
       gcolor3
       gitAndTools.gh
       inotify-tools
       lsd
+      montserrat
       neovim-remote
       nerdfonts-iosevka
       ngrok
       nix-prefetch-git
       nixfmt
+      nodePackages.js-beautify
+      nodePackages.prettier
+      nodePackages.typescript
       nodejs-12_x
       openvpn
       peco
@@ -36,8 +43,8 @@
       unstable.beam.packages.erlangR23.elixir_1_11
       unstable.docker
       unstable.docker-compose
+      unzip
       vscode-with-extensions
-      xcape
       xclip
     ];
 
@@ -82,12 +89,13 @@
           sha256 = "0jjjaf01zr1mph7s5bibjnn8ibjhf4bqjakfn8harb4mhak02n2p";
         };
       };
+      #Exec=kitty zsh -c "xcape && nvim"
       ".local/share/applications/neovim.desktop" = {
         text = ''
           [Desktop Entry]
           Encoding=UTF-8
           Name=NeoVim
-          Exec=kitty zsh -c "xcape && nvim"
+          Exec=kitty zsh -c "nvim"
           Icon=nvim
           Type=Application
           Categories=Development
@@ -100,6 +108,7 @@
 
   gtk = {
     enable = true;
+    font.name = "Montserrat";
     theme.name = "Adwaita-dark";
   };
 
@@ -154,7 +163,6 @@
       enableGnomeExtensions = true;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         sidebery
-        stylus
         ublock-origin
         vimium
       ];
@@ -196,7 +204,7 @@
         mergetool = { prompt = false; };
         pull.ff = "only";
       };
-      ignores = [ ".elixir_ls" ];
+      ignores = [ ".elixir_ls" "cover" "deps" "node_modules" ];
     };
 
     # TODO: Check if available on update
@@ -213,6 +221,12 @@
         disable_ligatures = "cursor";
         sync_to_monitor = "yes";
         mouse_hide_wait = "-1";
+      };
+      keybindings = {
+        "ctrl+q" = "no_op";
+        "ctrl+w" = "no_op";
+        "kitty_mod+q" = "no_op";
+        "kitty_mod+w" = "no_op";
       };
     };
 
@@ -232,6 +246,7 @@
           };
         };
       in with pkgs.vimPlugins; [
+        YankRing-vim
         ale
         emmet-vim
         fzf-vim
@@ -250,7 +265,6 @@
         vim-rhubarb
         vim-startify
         vim-vinegar
-        yankring
       ];
       extraConfig = builtins.readFile ./config.vim;
     };
@@ -316,6 +330,7 @@
         gf = "git fetch --all";
         gfico = "gsina | xargs git checkout";
         gfire = "gsina | xargs git reset";
+        ggc = "git branch | peco | xargs git branch --delete";
         ghl = "git stash list";
         ghp = "git stash pop";
         git = "noglob git";
