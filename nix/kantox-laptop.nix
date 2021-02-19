@@ -5,21 +5,19 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nixpkgs.config = {
     allowUnfree = true;
 
     packageOverrides = pkgs: rec {
       nur = import (builtins.fetchTarball {
-        url = "https://github.com/nix-community/NUR/archive/de27c87a57d0920e63fafab9f08d9c33aecf2e06.tar.gz";
+        url =
+          "https://github.com/nix-community/NUR/archive/de27c87a57d0920e63fafab9f08d9c33aecf2e06.tar.gz";
         sha256 = "0vg9xg0j8c0p6ng1yk3x53z4nfn647jnfn012r06ljzhny560r8d";
-      }) {
-        inherit pkgs;
-      };
+      }) { inherit pkgs; };
     };
   };
 
@@ -60,8 +58,8 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
   services.gnome3.chrome-gnome-shell.enable = true;
- 
-  # Enable Intel graphic drivers 
+
+  # Enable Intel graphic drivers
   services.xserver.videoDrivers = [ "intel" ];
 
   # Configure keymap in X11
@@ -71,11 +69,12 @@
   #   gsettings reset org.gnome.desktop.input-sources sources
   services.xserver.layout = "es";
   services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps";
-  console.useXkbConfig = true;
+  console.useXkbConfig = false;
+  services.interception-tools.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-  
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -136,4 +135,3 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
 }
-
