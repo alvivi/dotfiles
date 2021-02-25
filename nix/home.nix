@@ -89,7 +89,6 @@
           sha256 = "0jjjaf01zr1mph7s5bibjnn8ibjhf4bqjakfn8harb4mhak02n2p";
         };
       };
-      #Exec=kitty zsh -c "xcape && nvim"
       ".local/share/applications/neovim.desktop" = {
         text = ''
           [Desktop Entry]
@@ -99,6 +98,20 @@
           Icon=nvim
           Type=Application
           Categories=Development
+        '';
+      };
+      ".config/peco/config.json" = {
+        text = ''
+          {
+            "Style": {
+                "Basic": ["on_default", "default"],
+                "SavedSelection": ["bold", "on_yellow", "black"],
+                "Selected": ["underline", "on_cyan", "black"],
+                "Query": ["yellow", "bold"],
+                "Matched": ["red", "on_blue"]
+            },
+            "Use256Color": true
+          }
         '';
       };
     };
