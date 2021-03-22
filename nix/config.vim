@@ -172,6 +172,9 @@ noremap <Leader>se :Rg<CR>
 noremap <Leader>sf :FZF<CR>
 noremap <Leader>sg :GitFiles<CR>
 
+" Sort words
+vnoremap <Leader>sw d:execute 'normal i' . join(sort(split(getreg('"'))), ' ')<CR>
+
 "
 " ALE
 "
