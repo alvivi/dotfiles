@@ -186,13 +186,25 @@ let g:ale_cursor_detail = 1
 let g:ale_echo_delay = 1000
 let g:ale_elixir_elixir_ls_release = '/home/alvivi/Projects/elixir-ls/release'
 let g:ale_fix_on_save = 1
+let g:ale_html_beautify_executable = 'js-beautify'
+let g:ale_html_beautify_options = '--html'
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '.'
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'css': ['prettier'],
+\   'eelixir': ['html-beautify'],
+\   'html': ['prettier'],
+\   'javascript': ['prettier'],
+\   'json': ['prettier'],
+\   'markdown': ['prettier'],
+\   'scss': ['prettier'],
+\   'yaml': ['prettier'],
 \}
 let g:ale_linters = {
 \   'elixir': ['elixir-ls'],
+\   'javascript': ['tsserver'],
 \}
 
 nnoremap <silent> K :ALEHover<CR>
