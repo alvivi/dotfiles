@@ -58,6 +58,50 @@
       ];
     };
 
+    nixosConfigurations.kantoxLaptop = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        hardware.nixosModules.kantoxLaptop
+        ./modules/common.nix
+        inputs.home-manager.nixosModules.home-manager
+        ./modules/keyboard.nix
+
+        ({ pkgs, ... }: {
+          networking.hostName = "alvivi-kantox-laptop";
+          networking.networkmanager.enable = true;
+          networking.useDHCP = false;
+
+          systemd.services.NetworkManager-wait-online.enable = false;
+
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+
+          services.xserver.enable = true;
+          services.xserver.displayManager.gdm.enable = true;
+          services.xserver.desktopManager.gnome.enable = true;
+
+          services.fwupd.enable = true;
+
+          users = {
+            defaultUserShell = pkgs.zsh;
+
+            users.alvivi = {
+              isNormalUser = true;
+              extraGroups = [ "wheel" ];
+            };
+          };
+
+          environment = {
+            shells = [ pkgs.bashInteractive pkgs.zsh ];
+            systemPackages = [
+              inputs.home-manager.packages.x86_64-linux.home-manager
+              pkgs.vim
+            ];
+          };
+        })
+      ];
+    };
+
     checks = builtins.listToAttrs (map (system: {
       name = system;
       value = let pkgs = nixpkgs.outputs.legacyPackages."${system}";
