@@ -16,7 +16,7 @@
       "mergetool \"nvr\"" = {
         cmd = "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='";
       };
-      delta.features = "side-by-side line-numbers decorations";
+      delta.features = "line-numbers decorations";
       diff = { tool = "nvr"; };
       init = { defaultBranch = "main"; };
       merge = {
