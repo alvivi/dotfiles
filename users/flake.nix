@@ -28,7 +28,7 @@
 
           nixpkgs.overlays = [ nur.overlay ];
 
-          home = { packages = with pkgs; [ nixfmt unzip ]; };
+          home = { packages = with pkgs; [ nixfmt xclip unzip ]; };
 
           programs = {
             home-manager.enable = true;
