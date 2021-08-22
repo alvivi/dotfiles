@@ -28,7 +28,9 @@
 
           nixpkgs.overlays = [ nur.overlay ];
 
-          home = { packages = with pkgs; [ nixfmt xclip unzip ]; };
+          home = {
+            packages = with pkgs; [ gcc nixfmt nodejs tree-sitter unzip xclip ];
+          };
 
           programs = {
             direnv = {

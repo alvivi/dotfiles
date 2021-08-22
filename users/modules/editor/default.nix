@@ -54,6 +54,7 @@
       ${builtins.readFile ./base.vim}
       ${builtins.readFile ./theme.vim}
       ${builtins.readFile ./term.vim}
+      ${builtins.readFile ./treesitter.vim}
       ${builtins.readFile ./telescope.vim}
       ${builtins.readFile ./git.vim}
     '';
