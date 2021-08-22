@@ -26,6 +26,14 @@
       mergetool = { prompt = false; };
       pull.ff = "only";
     };
-    ignores = [ ".elixir_ls" "cover" "deps" "node_modules" ];
+    ignores = [
+      ".direnv"
+      ".elixir_ls"
+      ".envrc"
+      "cover"
+      "deps"
+      "node_modules"
+      "result"
+    ];
   };
 }
