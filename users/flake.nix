@@ -8,7 +8,7 @@
   };
 
   outputs = { self, nixpkgs, nur, ... }@inputs: {
-    homeConfigurations.alvivi =
+    homeConfigurations.nixos =
       inputs.home-manager.lib.homeManagerConfiguration {
         system = "x86_64-linux";
         homeDirectory = "/home/alvivi";
