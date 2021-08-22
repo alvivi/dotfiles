@@ -31,6 +31,13 @@
           home = { packages = with pkgs; [ nixfmt xclip unzip ]; };
 
           programs = {
+            direnv = {
+              enable = true;
+              nix-direnv = {
+                enable = true;
+                enableFlakes = true;
+              };
+            };
             home-manager.enable = true;
             gpg.enable = true;
           };
