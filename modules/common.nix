@@ -3,7 +3,7 @@
 
   nix = {
     package = pkgs.nixUnstable;
-    gc = { 
+    gc = {
       automatic = true;
       options = "--delete-older-than 14d";
     };
