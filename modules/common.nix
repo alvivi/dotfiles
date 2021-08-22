@@ -1,11 +1,19 @@
 { pkgs, ... }: {
   system.stateVersion = "21.05";
 
-  nix.package = pkgs.nixUnstable;
-  nix.extraOptions = "experimental-features = nix-command flakes";
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 14d";
-  nix.trustedUsers = [ "root" "@wheel" ];
+  nix = {
+    package = pkgs.nixUnstable;
+    gc = { 
+      automatic = true;
+      options = "--delete-older-than 14d";
+    };
+    trustedUsers = [ "root" "@wheel" ];
+    extraOptions = ''
+      experimental-features = nix-command flakes
+      keep-derivations = true
+      keep-outputs = true
+    '';
+  };
 
   nixpkgs.config.allowUnfree = true;
 
