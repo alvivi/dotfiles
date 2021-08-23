@@ -22,6 +22,8 @@
       sync_to_monitor = "yes";
       mouse_hide_wait = "-1";
 
+      linux_display_server = "x11";
+
       foreground = colorscheme.fg-primary;
       background = colorscheme.bg-primary;
       selection_foreground = colorscheme.fg-primary-bright;
