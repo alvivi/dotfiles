@@ -33,6 +33,8 @@
 
           home = {
             packages = with pkgs; [
+              docker
+              docker-compose
               gcc
               nixfmt
               nodejs

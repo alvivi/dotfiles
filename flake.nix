@@ -38,12 +38,14 @@
           services.xserver.displayManager.gdm.enable = true;
           services.xserver.desktopManager.gnome.enable = true;
 
+          virtualisation.docker.enable = true;
+
           users = {
             defaultUserShell = pkgs.zsh;
 
             users.alvivi = {
               isNormalUser = true;
-              extraGroups = [ "wheel" ];
+              extraGroups = [ "docker" "wheel" ];
             };
           };
 
@@ -82,12 +84,14 @@
 
           services.fwupd.enable = true;
 
+          virtualisation.docker.enable = true;
+
           users = {
             defaultUserShell = pkgs.zsh;
 
             users.alvivi = {
               isNormalUser = true;
-              extraGroups = [ "wheel" ];
+              extraGroups = [ "docker" "wheel" ];
             };
           };
 
