@@ -20,7 +20,7 @@
         "nixos-hardware": "nixos-hardware"
       },
       "locked": {
-        "narHash": "sha256-TCUlWlKA2cYeiJkTkX940It1/Smd7oiTKiGYAw4Lpkk=",
+        "narHash": "sha256-K5fBDf346vAreLCkyRfAr8b1gfN4NVkos3pFtPtyF2g=",
         "path": "hardware",
         "type": "path"
       },
@@ -119,7 +119,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-q+NsbqnfIlvddYTyFja0NJueepkmIYyI8UIiMOs0gw8=",
+        "narHash": "sha256-v7Vpv1sb2OSS9d3D9AB3ip+L08e2N/rzYWbtvscywak=",
         "path": "users",
         "type": "path"
       },
