@@ -26,10 +26,21 @@
             ./modules/terminal.nix
           ];
 
-          nixpkgs.overlays = [ nur.overlay ];
+          nixpkgs = {
+            config.allowUnfree = true;
+            overlays = [ nur.overlay ];
+          };
 
           home = {
-            packages = with pkgs; [ gcc nixfmt nodejs tree-sitter unzip xclip ];
+            packages = with pkgs; [
+              gcc
+              nixfmt
+              nodejs
+              slack
+              tree-sitter
+              unzip
+              xclip
+            ];
           };
 
           programs = {
