@@ -55,6 +55,7 @@
       ${builtins.readFile ./theme.vim}
       ${builtins.readFile ./term.vim}
       ${builtins.readFile ./treesitter.vim}
+      ${(import ./lsp.nix) pkgs}
       ${builtins.readFile ./telescope.vim}
       ${builtins.readFile ./git.vim}
     '';
