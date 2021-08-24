@@ -119,7 +119,7 @@
         ]
       },
       "locked": {
-        "narHash": "sha256-x/kKfuOmu6rGRRTQoevbdoGNr/E1aaoTASacCp8XRXU=",
+        "narHash": "sha256-mZk8dWoZOvYxZjp9lDz6oX9tUWV6Z2mid/NAsoTA/Lw=",
         "path": "users",
         "type": "path"
       },

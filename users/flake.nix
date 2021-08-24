@@ -39,6 +39,7 @@
               nixfmt
               nodejs
               slack
+              spotify
               tree-sitter
               unzip
               xclip
