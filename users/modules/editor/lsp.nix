@@ -56,4 +56,6 @@ pkgs: ''
       on_attach = on_attach,
     }
   EOF
+
+  autocmd BufWritePre *.ex,*.exs,*.eex,*.leex,*.heex lua vim.lsp.buf.formatting_seq_sync()
 ''
