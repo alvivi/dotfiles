@@ -9,23 +9,13 @@
 
     # Plugins To Review
     # - vim-table-mode
-    # - barbar-nvim & galaxyline-nvim
-    # - vim-which-key
+    # - vim-which-key (has catppuccino integration)
+    # - seneak.vim (has catppuccino integration)
+    # - fern / nvimtree / luatree  (has catppuccino integration)
 
     plugins = with pkgs;
       with pkgs.vimPlugins;
       let
-        nvim-comp = vimUtils.buildVimPlugin {
-          name = "nvim-comp";
-          src = fetchFromGitHub {
-            owner = "hrsh7th";
-            repo = "nvim-cmp";
-            rev = "0d97bfc875be615105083bcacdab5fe72706563f";
-            sha256 = "0a89pdw5rvj0haaqfvfx2ymkc6p3zdl936yc703rwksk8nzjhpni";
-          };
-          buildInputs = [ stylua ];
-        };
-
         cmp-buffer = vimUtils.buildVimPlugin {
           name = "cmp-buffer";
           src = fetchFromGitHub {
@@ -45,18 +35,30 @@
             sha256 = "0yq80sww53blvp0zq40a1744mricf4v3qafxrry4x812fv4bh8mk";
           };
         };
+
+        nvim-comp = vimUtils.buildVimPlugin {
+          name = "nvim-comp";
+          src = fetchFromGitHub {
+            owner = "hrsh7th";
+            repo = "nvim-cmp";
+            rev = "0d97bfc875be615105083bcacdab5fe72706563f";
+            sha256 = "0a89pdw5rvj0haaqfvfx2ymkc6p3zdl936yc703rwksk8nzjhpni";
+          };
+          buildInputs = [ stylua ];
+        };
       in [
         # Appearance
+        barbar-nvim
+        catppuccino-nvim
+        lualine-nvim
         nvim-web-devicons
-        vim-airline
-        vim-airline-themes
-        vim-one
+        trouble-nvim
         vim-startify
         vim-vinegar
 
         # Git
+        gitsigns-nvim
         vim-fugitive
-        vim-gitgutter
         vim-rhubarb
 
         # Programming

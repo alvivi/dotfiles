@@ -28,7 +28,22 @@
 
           nixpkgs = {
             config.allowUnfree = true;
-            overlays = [ nur.overlay ];
+            overlays = [
+              nur.overlay
+              (self: super: {
+                catppuccino-nvim = with pkgs;
+                  vimUtils.buildVimPlugin {
+                    name = "catppuccino-nvim";
+                    src = fetchFromGitHub {
+                      owner = "Pocco81";
+                      repo = "Catppuccino.nvim";
+                      rev = "485ddc2841f1c3db954632f722430a746b3659a8";
+                      sha256 =
+                        "14rlqj013k5594xy35bk7cq92y09yn23yvr3iam91ix00rw1id4i";
+                    };
+                  };
+              })
+            ];
           };
 
           home = {

@@ -4,10 +4,43 @@ if (has("termguicolors"))
 endif
 syntax enable
 
-let g:airline_theme='one'
-let g:one_allow_italics = 1
-set background=dark
-colorscheme one
+lua << EOF
+  local catppuccino = require("catppuccino")
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+  catppuccino.setup {
+    colorscheme = "catppuccino",
+    transparency = false,
+    styles = {
+      comments = "italic",
+      functions = "italic",
+      keywords = "italic",
+      strings = "NONE",
+      variables = "NONE",
+    },
+    integrations = {
+      treesitter = true,
+      native_lsp = {
+        enabled = true,
+        styles = {
+          errors = "italic",
+          hints = "italic",
+          warnings = "italic",
+          information = "italic"
+        }
+      },
+      lsp_trouble = true,
+      lsp_saga = true,
+      gitsigns = true,
+      telescope = true,
+    }
+  }
+
+  catppuccino.load()
+
+  require('lualine').setup {
+    options = {
+      theme = "catppuccino"
+    }
+  }
+EOF
+
