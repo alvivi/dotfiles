@@ -33,13 +33,16 @@
 
           home = {
             packages = with pkgs; [
+              awscli2
               docker
               docker-compose
               gcc
+              jq
               nixfmt
               nodejs
               slack
               spotify
+              ssm-session-manager-plugin
               tree-sitter
               unzip
               xclip
