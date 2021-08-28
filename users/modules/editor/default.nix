@@ -46,6 +46,18 @@
           };
           buildInputs = [ stylua ];
         };
+
+        # Overrided to support HEEX (Elixir HTML template language). Check
+        # default if default version supports it to remove this.
+        nvim-treesitter = vimUtils.buildVimPlugin {
+          name = "nvim-treesitter";
+          src = fetchFromGitHub {
+            owner = "nvim-treesitter";
+            repo = "nvim-treesitter";
+            rev = "1e4c846d01561821a737d08a6a5e2ac16d19c332";
+            sha256 = "0cl2h599i4xmvgm4k8cliiz43qz6xnirh1zb8sfibdnw0fbqfpa5";
+          };
+        };
       in [
         # Appearance
         barbar-nvim
