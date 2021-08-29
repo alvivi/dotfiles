@@ -78,6 +78,7 @@
         cmp-nvim-lsp
         emmet-vim
         lspsaga-nvim
+        neoformat
         nerdcommenter # Review tcomment_vim?
         nvim-comp
         nvim-lspconfig
@@ -109,6 +110,7 @@
       ${builtins.readFile ./treesitter.vim}
       ${builtins.readFile ./telescope.vim}
       ${builtins.readFile ./git.vim}
+      ${(import ./formatter.nix) pkgs}
     '';
   };
 }
