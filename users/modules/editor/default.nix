@@ -41,8 +41,8 @@
           src = fetchFromGitHub {
             owner = "hrsh7th";
             repo = "nvim-cmp";
-            rev = "0d97bfc875be615105083bcacdab5fe72706563f";
-            sha256 = "0a89pdw5rvj0haaqfvfx2ymkc6p3zdl936yc703rwksk8nzjhpni";
+            rev = "24406f995ea20abba816c0356ebff1a025c18a72";
+            sha256 = "142r41483xx7yw1gr4g1xi3rvzlprqwc72bq8rky0ys6mq50d7ic";
           };
           buildInputs = [ stylua ];
         };
