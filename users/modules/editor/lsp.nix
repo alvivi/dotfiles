@@ -73,6 +73,11 @@ pkgs: ''
       flags = { debounce_text_changes = 150, },
       on_attach = on_attach,
     }
+
+    lsp.tsserver.setup {
+      capabilities = capabilities,
+      cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }
+    }
   EOF
 
   autocmd BufWritePre *.ex,*.exs,*.eex,*.leex,*.heex lua vim.lsp.buf.formatting_seq_sync()
