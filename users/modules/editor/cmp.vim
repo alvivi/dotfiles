@@ -25,5 +25,7 @@ lua << EOF
       { name = 'buffer' },
       { name = 'nvim_lsp' },
     },
+
+    preselect = false,
   }
 EOF
