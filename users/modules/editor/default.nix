@@ -58,6 +58,26 @@
             sha256 = "0cl2h599i4xmvgm4k8cliiz43qz6xnirh1zb8sfibdnw0fbqfpa5";
           };
         };
+
+        vsnip = vimUtils.buildVimPlugin {
+          name = "vim-vsnip";
+          src = fetchFromGitHub {
+            owner = "hrsh7th";
+            repo = "vim-vsnip";
+            rev = "87d144b7451deb3ab55f1a3e3c5124cfab2b02fa";
+            sha256 = "17gw992xvxsa6wyirah17xbsdi2gl4lif8ibvbs7dwagnkv01vyb";
+          };
+        };
+
+        vsnip-integ = vimUtils.buildVimPlugin {
+          name = "vim-vsnip-integ";
+          src = fetchFromGitHub {
+            owner = "hrsh7th";
+            repo = "vim-vsnip-integ";
+            rev = "8f94cdd9ca6c3e6c328edaf22029f1bf17f3d1c5";
+            sha256 = "1wh44m7jn1s7jyk0g9flf2qhkqgcl5amfi5w7dwjqkr8z495r29h";
+          };
+        };
       in [
         # Appearance
         barbar-nvim
@@ -88,6 +108,8 @@
         telescope-nvim
         telescope-symbols-nvim
         vim-nix
+        vsnip
+        vsnip-integ
 
         # Dependencies
         plenary-nvim
