@@ -55,6 +55,7 @@
               jq
               nixfmt
               nodejs
+              shutter
               slack
               spotify
               ssm-session-manager-plugin
