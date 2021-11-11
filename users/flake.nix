@@ -68,10 +68,7 @@
           programs = {
             direnv = {
               enable = true;
-              nix-direnv = {
-                enable = true;
-                enableFlakes = true;
-              };
+              nix-direnv = { enable = true; };
             };
             home-manager.enable = true;
             gpg.enable = true;
