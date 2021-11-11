@@ -15,7 +15,7 @@
       };
       profiles.alvivi = {
         settings = {
-          "layout.css.devPixelsPerPx" = "1.25";
+          "layout.css.devPixelsPerPx" = "1.5";
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
         userChrome = ''

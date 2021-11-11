@@ -6,7 +6,10 @@
   };
 
   dconf.settings = {
-    "org/gnome/desktop/interface" = { text-scaling-factor = 1.4; };
+    "org/gnome/desktop/interface" = {
+      text-scaling-factor = 1.6;
+      cursor-size = 32;
+    };
 
     "org/gnome/mutter" = {
       experimental-features = [ "scale-monitor-framebuffer" ];
