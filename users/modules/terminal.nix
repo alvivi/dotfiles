@@ -16,8 +16,8 @@
   programs.kitty = {
     enable = true;
     font.name = "Iosevka Term";
-    extraConfig = builtins.readFile
-      "${pkgs.catppuccino-nvim}/share/vim-plugins/catppuccino-nvim/extra/kitty/catppuccino.conf";
+    extraConfig =
+      builtins.readFile "${pkgs.catppuccino-nvim}/extra/kitty/catppuccino.conf";
     settings = let colorscheme = import ./colorscheme.nix;
     in {
       disable_ligatures = "cursor";
