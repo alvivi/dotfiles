@@ -53,6 +53,7 @@
             shells = [ pkgs.bashInteractive pkgs.zsh ];
             systemPackages = [
               inputs.home-manager.packages.x86_64-linux.home-manager
+              pkgs.pciutils
               pkgs.vim
             ];
           };

@@ -34,6 +34,7 @@ nnoremap <C-p> :bprevious<CR>
 "
 
 let g:startify_custom_header = []
+autocmd User Startified setlocal buftype=nofile
 
 "
 " Easy Motion
@@ -95,3 +96,28 @@ nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
 nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
 nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 
+"
+" Indent Blankline
+"
+
+lua << EOF
+  require("indent_blankline").setup {
+      show_current_context = true,
+      show_current_context_start = true,
+  }
+EOF
+
+"
+" Virtual Column
+"
+
+lua << EOF
+  require('virtual-column').init({
+      column_number = 80,
+      overlay = false,
+      vert_char = "│",
+      enabled = true,
+      buftype_exclude = {"help", "nofile", "nowrite", "quickfix", "terminal", "prompt"},
+      filetype_exclude = {"netrw"},
+  })
+EOF

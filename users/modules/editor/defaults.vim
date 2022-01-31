@@ -4,7 +4,6 @@ set modeline                                   " allow per-file settings via mod
 set secure                                     " disable unsafe commands in local .vimrc files
 set noswapfile                                 " disable swap files
 set hlsearch incsearch ignorecase smartcase    " search
-set wildmenu                                   " completion
 set backspace=indent,eol,start                 " sane backspace
 set clipboard+=unnamed,unnamedplus             " use the system clipboard for yank/put/delete
 set mouse=a                                    " enable mouse for all modes settings
@@ -29,4 +28,3 @@ set nofoldenable                               " disable folding
 set tabstop=2 shiftwidth=2 expandtab           " use spaces, indent size = 2
 set lcs=tab:▸\ ,trail:·,nbsp:%                 " invisible characters
 set shell=zsh                                  " use ZSH by default
-let &colorcolumn="80,120" " show length column " column rules 

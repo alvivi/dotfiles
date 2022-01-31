@@ -7,7 +7,9 @@
       automatic = true;
       options = "--delete-older-than 14d";
     };
-    trustedUsers = [ "root" "@wheel" ];
+    settings = {
+      trusted-users = [ "root" "@wheel" ];
+    };
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-derivations = true

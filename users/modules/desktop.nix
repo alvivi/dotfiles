@@ -2,7 +2,37 @@
   gtk = {
     enable = true;
     font.name = "Montserrat";
-    theme.name = "Adwaita-dark";
+    theme = {
+      name = "Catppuccin-magenta";
+      package = pkgs.catppuccin-magenta-gtk;
+    };
+  };
+
+  nixpkgs = {
+    overlays = [
+      (self: super: {
+        catppuccin-magenta-gtk = pkgs.stdenv.mkDerivation rec {
+          pname = "catppuccin-magenta-gtk";
+          version = "1.0.0";
+
+          src = pkgs.fetchzip {
+            url =
+              "https://github.com/catppuccin/gtk/releases/download/v.1.0.0/Catppuccin-magenta.tar.gz";
+            sha256 = "106v4fqylx2ck1fhg0j1h80p8fczma4x12zw91cnsm9npa486rqy";
+          };
+
+          propagatedUserEnvPkgs = with pkgs; [
+            gnome.gnome-themes-extra
+            gtk-engine-murrine
+          ];
+
+          installPhase = ''
+            mkdir -p $out/share/themes/Catppuccin-magenta
+            ls | xargs mv -t $out/share/themes/Catppuccin-magenta
+          '';
+        };
+      })
+    ];
   };
 
   dconf.settings = {

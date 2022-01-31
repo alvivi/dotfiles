@@ -16,10 +16,15 @@
   programs.kitty = {
     enable = true;
     font.name = "Iosevka Term";
-    extraConfig =
-      builtins.readFile "${pkgs.catppuccino-nvim}/extra/kitty/catppuccino.conf";
-    settings = let colorscheme = import ./colorscheme.nix;
-    in {
+    extraConfig = let
+      catppuccin-kitty = pkgs.fetchFromGitHub {
+        owner = "catppuccin";
+        repo = "kitty";
+        rev = "2433655cad4a7ff69b331f79eb98942d97659d5f";
+        sha256 = "1b8082vrfnsavs6p6x4ibld8ylqv7zaxaanys3ibwb483rf1hvjn";
+      };
+    in builtins.readFile "${catppuccin-kitty}/catppuccin.conf";
+    settings = {
       disable_ligatures = "cursor";
       sync_to_monitor = "yes";
       mouse_hide_wait = "-1";

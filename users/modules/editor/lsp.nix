@@ -88,6 +88,8 @@ pkgs: ''
       on_attach = on_attach,
     }
 
+    lsp.rnix.setup { }
+
     lsp.tsserver.setup {
       capabilities = capabilities,
       cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }

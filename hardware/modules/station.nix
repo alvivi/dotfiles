@@ -3,7 +3,11 @@
     [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" "wl" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.broadcom_sta ];
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.broadcom_sta
+    config.boot.kernelPackages.nvidia_x11
+  ];
 
   boot.loader = {
     efi = {
@@ -17,7 +21,6 @@
       efiSupport = true;
       useOSProber = true;
     };
-    systemd-boot.enable = true;
   };
 
   fileSystems."/" = {
@@ -33,7 +36,13 @@
   swapDevices = [{ device = "/dev/disk/by-label/swap"; }];
 
   hardware.video.hidpi.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+    displayManager.gdm = {
+      wayland = false;
+      nvidiaWayland = false;
+    };
+  };
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
