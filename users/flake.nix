@@ -40,6 +40,7 @@
               jq
               nixfmt
               nodejs
+              openvpn
               rnix-lsp
               shutter
               slack
