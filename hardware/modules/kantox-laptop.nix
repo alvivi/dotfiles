@@ -16,7 +16,6 @@
       devices = [ "nodev" ];
       efiSupport = true;
     };
-    systemd-boot.enable = true;
   };
 
   fileSystems."/" = {
@@ -42,4 +41,3 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
-
