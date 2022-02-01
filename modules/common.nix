@@ -2,14 +2,12 @@
   system.stateVersion = "21.05";
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nix_2_4;
     gc = {
       automatic = true;
       options = "--delete-older-than 14d";
     };
-    settings = {
-      trusted-users = [ "root" "@wheel" ];
-    };
+    settings = { trusted-users = [ "root" "@wheel" ]; };
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-derivations = true
