@@ -20,7 +20,7 @@
             ./modules/fonts.nix
             ./modules/desktop.nix
             ./modules/shell
-            ./modules/git.nix
+            ./modules/git
             ./modules/browser.nix
             ./modules/editor
             ./modules/terminal.nix
