@@ -16,7 +16,9 @@
             owner = "lukas-reineke";
             repo = "virt-column.nvim";
             rev = "29db24c5e94243df1f34f47bbcb4e7803204cae4";
-            sha256 = "05v1pddjp9050idp0rb8fyz8gdh00r3h7py4glg3n6r0b01hwlka"; }; };
+            sha256 = "05v1pddjp9050idp0rb8fyz8gdh00r3h7py4glg3n6r0b01hwlka";
+          };
+        };
       in
       [
         # Appearance

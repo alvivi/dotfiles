@@ -25,7 +25,8 @@
             sha256 = "0r9jq59hl3d64hih1qf2axh74rib7f2ypv9ljwdmriz8mdq2a16i";
           };
         };
-      in [
+      in
+      [
 
         # Appearance
 

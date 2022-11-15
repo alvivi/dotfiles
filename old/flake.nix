@@ -107,16 +107,18 @@
       ];
     };
 
-    checks = builtins.listToAttrs (map (system: {
-      name = system;
-      value = let pkgs = nixpkgs.outputs.legacyPackages."${system}";
-      in {
-        nixfmt-check = pkgs.runCommand "nixfmt-alivi-config" { } ''
-          ${pkgs.nixfmt}/bin/nixfmt --check \
-            $(find ${self} -type f -name '*.nix')
-          mkdir $out
-        '';
-      };
-    }) [ "x86_64-darwin" "x86_64-linux" ]);
+    checks = builtins.listToAttrs (map
+      (system: {
+        name = system;
+        value =
+          let pkgs = nixpkgs.outputs.legacyPackages."${system}";
+          in {
+            nixfmt-check = pkgs.runCommand "nixfmt-alivi-config" { } ''
+              ${pkgs.nixfmt}/bin/nixfmt --check \
+                $(find ${self} -type f -name '*.nix')
+              mkdir $out
+            '';
+          };
+      }) [ "x86_64-darwin" "x86_64-linux" ]);
   };
 }
