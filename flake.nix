@@ -1,122 +1,56 @@
 {
-  description = "Alvivi's systems configuration";
+  description = "Alvivi's system configuration";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    hardware.url = "path:hardware";
     home-manager.url = "github:nix-community/home-manager";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    users.url = "path:users";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    users.inputs.home-manager.follows = "home-manager";
-    users.inputs.nixpkgs.follows = "nixpkgs";
-    users.inputs.nur.follows = "nur";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { hardware, nixpkgs, self, users, ... }@inputs: {
-    homeConfigurations = users.outputs.homeConfigurations;
-
-    nixosConfigurations.nixStation = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        hardware.nixosModules.station
-        ./modules/common.nix
-        inputs.home-manager.nixosModules.home-manager
-        ./modules/keyboard.nix
-
-        ({ pkgs, ... }: {
-          networking.hostName = "nix-station";
-          networking.useDHCP = false;
-          networking.interfaces.enp6s0.useDHCP = true;
-
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          services.xserver.enable = true;
-          services.xserver.displayManager.gdm.enable = true;
-          services.xserver.desktopManager.gnome.enable = true;
-
-          virtualisation.docker.enable = true;
-
-          users = {
-            defaultUserShell = pkgs.zsh;
-
-            users.alvivi = {
-              isNormalUser = true;
-              extraGroups = [ "docker" "wheel" ];
-            };
-          };
-
-          environment = {
-            shells = [ pkgs.bashInteractive pkgs.zsh ];
-            systemPackages = [
-              inputs.home-manager.packages.x86_64-linux.home-manager
-              pkgs.pciutils
-              pkgs.vim
+  outputs = { flake-utils, nixpkgs, nur, sops-nix, ... }@inputs: {
+    nixosConfigurations =
+      let
+        home-manager = { pkgs, ... }: {
+          imports = [ inputs.home-manager.nixosModules.home-manager ];
+          home-manager = { useGlobalPkgs = true; useUserPackages = true; };
+          environment.systemPackages = [ inputs.home-manager.packages.${pkgs.system}.home-manager ];
+        };
+      in
+      {
+        hiigara =
+          nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              nur.nixosModules.nur
+              sops-nix.nixosModules.sops
+              ./modules/hosts/hiigara
+              home-manager
             ];
           };
-        })
-      ];
-    };
-
-    nixosConfigurations.kantoxLaptop = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        hardware.nixosModules.kantoxLaptop
-        ./modules/common.nix
-        inputs.home-manager.nixosModules.home-manager
-        ./modules/keyboard.nix
-
-        ({ pkgs, ... }: {
-          networking.hostName = "alvivi-kantox-laptop";
-          networking.networkmanager.enable = true;
-          networking.useDHCP = false;
-
-          systemd.services.NetworkManager-wait-online.enable = false;
-
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          services.xserver.enable = true;
-          services.xserver.displayManager.gdm.enable = true;
-          services.xserver.desktopManager.gnome.enable = true;
-
-          services.fwupd.enable = true;
-
-          virtualisation.docker.enable = true;
-
-          users = {
-            defaultUserShell = pkgs.zsh;
-
-            users.alvivi = {
-              isNormalUser = true;
-              extraGroups = [ "docker" "wheel" ];
-            };
-          };
-
-          environment = {
-            shells = [ pkgs.bashInteractive pkgs.zsh ];
-            systemPackages = [
-              inputs.home-manager.packages.x86_64-linux.home-manager
-              pkgs.vim
-            ];
-          };
-        })
-      ];
-    };
-
-    checks = builtins.listToAttrs (map (system: {
-      name = system;
-      value = let pkgs = nixpkgs.outputs.legacyPackages."${system}";
-      in {
-        nixfmt-check = pkgs.runCommand "nixfmt-alivi-config" { } ''
-          ${pkgs.nixfmt}/bin/nixfmt --check \
-            $(find ${self} -type f -name '*.nix')
-          mkdir $out
-        '';
       };
-    }) [ "x86_64-darwin" "x86_64-linux" ]);
+
+    homeConfigurations.alvivi =
+      let
+        system = "x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [ ./modules/users ];
+      };
+
+    formatter =
+      builtins.listToAttrs (map
+        (system: {
+          name = system;
+          value = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+        })
+        flake-utils.lib.defaultSystems);
   };
 }
