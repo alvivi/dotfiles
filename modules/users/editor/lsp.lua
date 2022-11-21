@@ -77,23 +77,19 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 
--- TODO: Fix this
-
--- lsp.elixirls.setup {
---   capabilities = capabilities,
---   cmd = { "${pkgs.elixir_ls}/bin/elixir-ls" },
---   flags = { debounce_text_changes = 150, },
---   on_attach = on_attach,
--- }
+lsp.elixirls.setup {
+  capabilities = capabilities,
+  cmd = { vim.g.lsp_elixir_bin },
+  flags = { debounce_text_changes = 150, },
+  on_attach = on_attach,
+}
 
 lsp.rnix.setup { }
 
--- TODO: Fix this
-
--- lsp.tsserver.setup {
---   capabilities = capabilities,
---   cmd = { "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" }
--- }
+lsp.tsserver.setup {
+  capabilities = capabilities,
+  cmd = { vim.g.lsp_tsserver_bin, "--stdio" }
+}
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = {"*.ex", "*.exs", "*.eex", "*.leex", "*.heex" },

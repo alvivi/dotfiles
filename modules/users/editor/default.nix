@@ -77,6 +77,9 @@
 
     extraConfig = ''
       lua << EOF
+        vim.g.lsp_elixir_bin = "${pkgs.elixir_ls}/bin/elixir-ls"
+        vim.g.lsp_tsserver_bin = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
+
         ${builtins.readFile ./defaults.lua}
         ${builtins.readFile ./base.lua}
         ${builtins.readFile ./theme.lua}
