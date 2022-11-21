@@ -93,7 +93,5 @@ lsp.tsserver.setup {
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = {"*.ex", "*.exs", "*.eex", "*.leex", "*.heex" },
-  callback = function()
-    vim.schedule(vim.lsp.buf.formatting_seq_sync)
-  end
+  callback = vim.lsp.buf.formatting_seq_sync
 })
