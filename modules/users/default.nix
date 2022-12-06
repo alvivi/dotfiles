@@ -23,25 +23,30 @@
   ];
 
   home = {
-    packages = with pkgs; [
-      # awscli2
-      # docker
-      # docker-compose
-      # nodejs
-      # openvpn
-      # shutter
-      # ssm-session-manager-plugin
-      curl
-      gcc
-      jq
-      rnix-lsp
-      slack
-      spotify
-      tree-sitter
-      unzip
-      xclip
-      zip
-    ];
+    packages = with pkgs;
+      let
+      in
+      [
+        # nodejs
+        # openvpn
+        # shutter
+        awscli2
+        blockbench-electron-2
+        curl
+        gcc
+        gimp
+        gimp
+        jq
+        podman-compose
+        rnix-lsp
+        slack
+        spotify
+        ssm-session-manager-plugin
+        tree-sitter
+        unzip
+        xclip
+        zip
+      ];
   };
 
   programs = {
