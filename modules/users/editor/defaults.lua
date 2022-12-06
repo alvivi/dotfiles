@@ -34,6 +34,8 @@ vim.opt.showcmd = true -- Show command in bottom bar
 vim.opt.wildmenu = true -- Visual autocomplete for command menu
 
 vim.opt.spell = true -- Enable spell checking
+vim.opt.spelllang = {'en', 'es'} -- Spell languages
+vim.opt.spelloptions = 'camel' -- Check CamelCase as separate words
 
 vim.opt.splitbelow = true -- Vertical split below
 vim.opt.splitright = true -- Horizontal split right
