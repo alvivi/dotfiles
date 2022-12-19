@@ -29,6 +29,8 @@
       enable = true;
       theme = "breeze";
     };
+
+    supportedFilesystems = [ "ntfs" ];
   };
 
   fileSystems = {
