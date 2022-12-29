@@ -2,11 +2,8 @@
 # NOTE: nix-prefetch-url --type sha256 --unpack https://github.com/elixir-lang/elixir/archive/refs/tags/v${VERSION}.zip
 
 { flake-utils, nixpkgs, ... }:
-let
-  mkElixirErlangShell = import ./elixir_erlang.nix;
-in
-flake-utils.lib.eachDefaultSystemMap (system:
-{
+let mkElixirErlangShell = import ./elixir_erlang.nix;
+in flake-utils.lib.eachDefaultSystemMap (system: {
   elixir_1_14_2_erlang_25_1 = mkElixirErlangShell {
     inherit system;
     inherit nixpkgs;
@@ -25,5 +22,7 @@ flake-utils.lib.eachDefaultSystemMap (system:
     erlangSha256 = "1hb5rr952lgglwz721hkczjrag29ri1w9q3va6whcx3dwsyw39i2";
   };
 
-  elixir_wallaby = import ./elixir_wallaby.nix { inherit system; inherit nixpkgs; };
+  elixir_wallaby = import ./elixir_wallaby.nix { inherit system nixpkgs; };
+
+  node = import ./node.nix { inherit system nixpkgs; };
 })
