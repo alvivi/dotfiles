@@ -79,6 +79,7 @@
       lua << EOF
         vim.g.lsp_elixir_bin = "${pkgs.elixir_ls}/bin/elixir-ls"
         vim.g.lsp_tsserver_bin = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
+        vim.g.lsp_tsserver_ts_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
 
         ${builtins.readFile ./defaults.lua}
         ${builtins.readFile ./base.lua}
