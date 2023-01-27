@@ -28,6 +28,7 @@
       ".envrc"
       "cover"
       "deps"
+      "flake.lock"
       "node_modules"
       "result"
     ];
