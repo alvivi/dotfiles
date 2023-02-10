@@ -19,7 +19,7 @@
   gco = "git checkout";
   gcoi =
     "git branch --all | peco | sed 's/remotes\\/origin\\///g' | xargs git checkout";
-  ghcoi = "gh pr list | peco | awk '{ NF-=1; print $NF}' | xargs git checkout";
+  ghcoi = "gh pr list --json number,title,headRefName --template '{{range .}}{{tablerow .number .title .headRefName}}{{end}}' | peco | awk '{print $NF}' | xargs git checkout";
   gd = "git diff";
   gdi = "gsina | xargs -o git diff";
   gf = "git fetch --all";
