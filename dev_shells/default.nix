@@ -4,6 +4,25 @@
 { flake-utils, nixpkgs, ... }:
 let mkElixirErlangShell = import ./elixir_erlang.nix;
 in flake-utils.lib.eachDefaultSystemMap (system: {
+  elixir_1_15_4_erlang_26_0_2 = mkElixirErlangShell {
+    inherit system;
+    inherit nixpkgs;
+    elixirVersion = "1.15.4";
+    elixirSha256 = "sha256-0DrfKQPyFX+zurCIZ6RVj9vm1lHSkJSfhiUaRpa3FFo=";
+    elixirEscriptPath = "lib/elixir/scripts/generate_app.escript";
+    erlangVersion = "26.0.2";
+    erlangSha256 = "sha256-GzF/cpTUe5hoocDK5aio/lo8oYFeTr+HkftTYpQnOdA=";
+  };
+
+  elixir_1_14_3_erlang_25_2_2 = mkElixirErlangShell {
+    inherit system;
+    inherit nixpkgs;
+    elixirVersion = "1.14.3";
+    elixirSha256 = "0kkq1nk75snnk5z75ypcfcg2if611yi33lkr2n5dcr800k42xfgj";
+    erlangVersion = "25.2.2";
+    erlangSha256 = "0jwwvs6fq7rljnk9sy22ycd98y86dvgjnb0fh6zmfz32i3c23w8x";
+  };
+
   elixir_1_14_2_erlang_25_1 = mkElixirErlangShell {
     inherit system;
     inherit nixpkgs;

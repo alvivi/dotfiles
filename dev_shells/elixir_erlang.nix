@@ -9,10 +9,13 @@ let
         sha256 = inputs.erlangSha256;
       };
 
-      elixir = (super.beam.packagesWith erlang).elixir.override {
-        version = inputs.elixirVersion;
+      elixir = (super.beam.packagesWith erlang).elixir.override ({
         sha256 = inputs.elixirSha256;
-      };
+        version = inputs.elixirVersion;
+      } // (if inputs ? elixirEscriptPath then {
+        escriptPath = inputs.elixirEscriptPath;
+      } else
+        { }));
     })
   ];
   system = inputs.system;
