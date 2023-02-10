@@ -21,6 +21,7 @@
       (spotify.override { deviceScaleFactor = 1.5; })
       awscli2
       curl
+      entr
       gcc
       gimp
       jq
