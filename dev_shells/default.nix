@@ -12,7 +12,7 @@ flake-utils.lib.eachDefaultSystemMap (system: {
     elixirSha256 = "063pfz6ljy22b4nyvk8pi8ggqb6nmzqcca08vnl3h9xgh1zzddpj";
     elixirEscriptPath = "lib/elixir/scripts/generate_app.escript";
     erlangVersion = "27.0.1";
-    erlangSha256 = "sha256-Lp6J9eq6RXDi0RRjeVO/CIa4h/m7/fwOp/y0u0sTdFQ=";
+    erlangSha256 = "0m3l2d5vpd7wlw7grzdvz63vi1h8px9pjqqls7i70idsxbsqk7if";
   };
 
   elixir_1_15_6_erlang_26_1_1 = mkElixirErlangShell {
