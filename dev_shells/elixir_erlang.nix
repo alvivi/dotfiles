@@ -4,9 +4,9 @@ inputs:
 let
   overlays = [
     (self: super: rec {
-      erlang = super.beam.interpreters.erlangR27.override {
-        version = inputs.erlangVersion;
+      erlang = super.beam.interpreters.erlang_27.override {
         sha256 = inputs.erlangSha256;
+        version = inputs.erlangVersion;
       };
 
       elixir = (super.beam.packagesWith erlang).elixir.override ({
