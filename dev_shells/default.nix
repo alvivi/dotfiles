@@ -9,10 +9,10 @@ flake-utils.lib.eachDefaultSystemMap (system: {
     inherit system;
     inherit nixpkgs;
     elixirVersion = "1.17.2";
-    elixirSha256 = "eRwyqylldsJOsGAwm61m7jX1yrVDrTPS0qO23lJkcKc=";
+    elixirSha256 = "063pfz6ljy22b4nyvk8pi8ggqb6nmzqcca08vnl3h9xgh1zzddpj";
     elixirEscriptPath = "lib/elixir/scripts/generate_app.escript";
     erlangVersion = "27.0.1";
-    erlangSha256 = "Y0sArUFkGxlAAgrgUxn5Rjnd72geG08VO9FBxg/fJAg=";
+    erlangSha256 = "0ch06b6ycm0l4lyzxg1nvhndw10jrsl3gc5k451r7967nm9gxq9d";
   };
 
   elixir_1_15_6_erlang_26_1_1 = mkElixirErlangShell {
