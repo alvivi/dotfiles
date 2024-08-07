@@ -11,6 +11,7 @@
   };
 
   outputs = { flake-utils, nixpkgs, ... }@inputs: {
+    devShells = import ./dev_shells inputs;
     formatter = flake-utils.lib.eachDefaultSystemMap (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
     homeConfigurations = { alvivi = import ./users/alvivi inputs; };
     nixosConfigurations = {
