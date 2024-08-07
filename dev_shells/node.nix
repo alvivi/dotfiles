@@ -11,7 +11,8 @@ let
   ];
   system = inputs.system;
   pkgs = import inputs.nixpkgs { inherit system overlays; };
-in pkgs.mkShell {
+in
+pkgs.mkShell {
   buildInputs = with pkgs; [ node2nix nodejs pnpm yarn ];
 
   shellHook = ''

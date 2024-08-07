@@ -73,3 +73,4 @@ color diff-del-highlight            9           52
 # Signature colors
 color "gpg: "                       23          default
 color "Primary key fingerprint: "   23          default
+

@@ -7,6 +7,22 @@
     vimAlias = true;
     vimdiffAlias = true;
 
+    extraLuaConfig = ''
+      vim.g.lsp_elixir_bin = "${pkgs.elixir_ls}/bin/elixir-ls"
+      vim.g.lsp_tsserver_bin = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
+      vim.g.lsp_tsserver_ts_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
+
+      ${builtins.readFile ./defaults.lua}
+      ${builtins.readFile ./base.lua}
+      ${builtins.readFile ./theme.lua}
+      ${builtins.readFile ./term.lua}
+      ${builtins.readFile ./git.lua}
+      ${builtins.readFile ./treesitter.lua}
+      ${builtins.readFile ./telescope.lua}
+      ${builtins.readFile ./lsp.lua}
+      ${builtins.readFile ./cmp.lua}
+    '';
+
     plugins = with pkgs;
       with pkgs.vimPlugins;
       let
@@ -15,8 +31,8 @@
           src = fetchFromGitHub {
             owner = "lukas-reineke";
             repo = "virt-column.nvim";
-            rev = "29db24c5e94243df1f34f47bbcb4e7803204cae4";
-            sha256 = "05v1pddjp9050idp0rb8fyz8gdh00r3h7py4glg3n6r0b01hwlka";
+            rev = "b62b4ef0774d19452d4ed18e473e824c7a756f2f";
+            hash = "sha256-7ljjJ7UwN2U1xPCtsYbrKdnz6SGQGbM/HrxPTxNKlwo=";
           };
         };
       in
@@ -37,10 +53,11 @@
         # Programming
 
         cmp-nvim-lsp
+        lsp-format-nvim
         lspsaga-nvim
         nvim-lspconfig
         nvim-treesitter
-        nvim-treesitter-refactor # TODO: Review and update config
+        nvim-treesitter-refactor
         nvim-treesitter-textobjects # TODO: Review and update config
         trouble-nvim
 
@@ -68,29 +85,12 @@
         YankRing-vim # TODO: Review
         undotree # TODO: Review
 
-        # TODO: Review neoformat
-        # TODO: Review vim-table-mode
-        # TODO: Review vim-which-key (has catppuccino integration)
-        # TODO: Review - seneak.vim (has catppuccino integration)
-        # TODO: Review fern / nvimtree / luatree  (have catppuccino integration)
+        #     # TODO: Review neoformat
+        #     # TODO: Review vim-table-mode
+        #     # TODO: Review vim-which-key (has catppuccino integration)
+        #     # TODO: Review - seneak.vim (has catppuccino integration)
+        #     # TODO: Review fern / nvimtree / luatree  (have catppuccino integration)
       ];
 
-    extraConfig = ''
-      lua << EOF
-        vim.g.lsp_elixir_bin = "${pkgs.elixir_ls}/bin/elixir-ls"
-        vim.g.lsp_tsserver_bin = "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server"
-        vim.g.lsp_tsserver_ts_path = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib"
-
-        ${builtins.readFile ./defaults.lua}
-        ${builtins.readFile ./base.lua}
-        ${builtins.readFile ./theme.lua}
-        ${builtins.readFile ./term.lua}
-        ${builtins.readFile ./git.lua}
-        ${builtins.readFile ./treesitter.lua}
-        ${builtins.readFile ./telescope.lua}
-        ${builtins.readFile ./lsp.lua}
-        ${builtins.readFile ./cmp.lua}
-      EOF
-    '';
   };
 }

@@ -1,13 +1,9 @@
 {
   cat = "bat";
-  dockerbash =
-    "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker exec -ti {} /bin/bash";
-  dockerkill =
-    "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker kill {}";
-  dockersh =
-    "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker exec -ti {} /bin/sh";
-  dockerstop =
-    "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker stop {}";
+  dockerbash = "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker exec -ti {} /bin/bash";
+  dockerkill = "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker kill {}";
+  dockersh = "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker exec -ti {} /bin/sh";
+  dockerstop = "docker ps --format '{{.ID}}: {{.Image}} {{.Names}}' | peco | sed 's/: .*//g' | xargs -I{} -ot docker stop {}";
   g = "git";
   ga = "git add";
   gai = "gsina | xargs git add";
@@ -17,15 +13,14 @@
   gbdi = "git branch | peco | xargs git branch -d";
   gc = "git commit";
   gco = "git checkout";
-  gcoi =
-    "git branch --all | peco | sed 's/remotes\\/origin\\///g' | xargs git checkout";
-  ghcoi = "gh pr list --json number,title,headRefName --template '{{range .}}{{tablerow .number .title .headRefName}}{{end}}' | peco | awk '{print $NF}' | xargs git checkout";
+  gcoi = "git branch --all | peco | sed 's/remotes\\/origin\\///g' | xargs git checkout";
   gd = "git diff";
   gdi = "gsina | xargs -o git diff";
   gf = "git fetch --all";
   gfico = "gsina | xargs git checkout";
   gfire = "gsina | xargs git reset";
   ggc = "git branch | peco | xargs git branch --delete";
+  ghcoi = "gh pr list --json number,title,headRefName --template '{{range .}}{{tablerow .number .title .headRefName}}{{end}}' | peco | awk '{print $NF}' | xargs git checkout";
   ghl = "git stash list";
   ghp = "git stash pop";
   git = "noglob git";
@@ -33,12 +28,13 @@
   gp = "git push";
   gpo = "git push origin";
   gpot = "git push origin --tags";
-  gpuo =
-    "git push -u origin --force-with-lease `git rev-parse --abbrev-ref HEAD`";
+  gpuo = "git push -u origin --force-with-lease `git rev-parse --abbrev-ref HEAD`";
   gr = "git reset";
   grc = "git rev-list -n 1 HEAD --";
   gri = "gsina | git reset";
   gs = "git status";
   gull = "git pull";
+  nix-prefetch-sri = "nix-prefetch-url $1 | xargs nix hash to-sri --type sha256";
 }
+
 

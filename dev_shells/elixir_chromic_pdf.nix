@@ -2,7 +2,8 @@ inputs:
 let
   system = inputs.system;
   pkgs = import inputs.nixpkgs { inherit system; };
-in pkgs.mkShell {
+in
+pkgs.mkShell {
   buildInputs = with pkgs; [ chromium ghostscript ];
 
   shellHook = ''

@@ -1,4 +1,3 @@
-
 # Git Utils
 
 function gsina {
@@ -7,3 +6,4 @@ function gsina {
   | peco \
   | awk '{ print "'`git rev-parse --show-toplevel`'/"$2 }'
 }
+

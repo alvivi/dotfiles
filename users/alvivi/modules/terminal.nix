@@ -15,7 +15,7 @@
 
   programs.kitty = {
     enable = true;
-    font.name = "Iosevka Term";
+    font.name = "Iosevka Nerd Font Mono";
     extraConfig =
       let
         catppuccin-kitty = pkgs.fetchFromGitHub {
@@ -41,4 +41,3 @@
     };
   };
 }
-

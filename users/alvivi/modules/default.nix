@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: rec {
+{ pkgs, ... }: rec {
   imports = [
     ./browser.nix
     ./desktop.nix
@@ -12,13 +12,9 @@
   home = {
     username = "alvivi";
     homeDirectory = "/home/alvivi";
-    stateVersion = "22.11";
-
-    # FIX: https://nixos.wiki/wiki/Slack
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    stateVersion = "23.11";
 
     packages = with pkgs; [
-      (spotify.override { deviceScaleFactor = 1.5; })
       awscli2
       curl
       entr
@@ -26,25 +22,20 @@
       gimp
       jq
       podman-compose
+      putty
       rnix-lsp
       slack
+      spotify
       ssm-session-manager-plugin
+      tcptraceroute
       trash-cli
       tree-sitter
       unzip
+      via
+      wine
       xclip
       zip
     ];
-  };
-
-  homeage = {
-    identityPaths = [ "~/.ssh/id_ed25519" ];
-    installationType = "activation";
-
-    file.aws_config = {
-      source = ../../../secrets/aws_config.age;
-      symlinks = [ "${home.homeDirectory}/.aws/config" ];
-    };
   };
 
   nixpkgs = {
@@ -53,10 +44,6 @@
       allowUnfree = true;
       allowUnfreePredicate = (pkg: true);
     };
-
-    overlays = [
-      (import ../overlays/slack.nix)
-    ];
   };
 
   programs = {
@@ -66,6 +53,7 @@
     };
     home-manager.enable = true;
     gpg.enable = true;
+    ssh.enable = true;
   };
 
   services.gpg-agent.enable = true;

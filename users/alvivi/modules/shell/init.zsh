@@ -1,4 +1,3 @@
-
 # Conditionally Alias NVim Remote
 
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
@@ -8,3 +7,4 @@ if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
     alias nvim='echo "No nesting!"'
   fi
 fi
+

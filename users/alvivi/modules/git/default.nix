@@ -9,16 +9,12 @@
     delta.enable = true;
     extraConfig = {
       "difftool \"nvr\"" = { cmd = "nvr -s -d $LOCAL $REMOTE"; };
-      "mergetool \"nvr\"" = {
-        cmd = "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='";
-      };
+      "mergetool \"nvr\"" = { cmd = "nvr -s -d $LOCAL $BASE $REMOTE $MERGED -c 'wincmd J | wincmd ='"; };
+      core.sshCommand = "${pkgs.putty}/bin/plink";
       delta.features = "line-numbers decorations";
       diff = { tool = "nvr"; };
       init = { defaultBranch = "main"; };
-      merge = {
-        tool = "nvr";
-        conflictstyle = "diff3";
-      };
+      merge = { tool = "nvr"; conflictstyle = "diff3"; };
       mergetool = { prompt = false; };
       pull.ff = "only";
     };
@@ -41,4 +37,5 @@
     userName = "Alvaro Vilanova Vidal";
   };
 }
+
 

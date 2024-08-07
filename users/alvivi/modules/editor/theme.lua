@@ -1,7 +1,7 @@
 local catppuccin = require("catppuccin")
 
-catppuccin.setup {}
-vim.cmd("colorscheme catppuccin")
+catppuccin.setup({})
+vim.cmd.colorscheme("catppuccin")
 
 require('lualine').setup {
   options = {

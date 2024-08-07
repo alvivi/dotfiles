@@ -113,23 +113,12 @@ vim.keymap.set("n", "<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>")
 -- Indent Blankline
 --
 
-require("indent_blankline").setup {
-  show_current_context = true,
-  show_current_context_start = true,
-}
+require("ibl").setup()
 
 --
 -- Virtual Column
 --
 
--- FIX THIS
-vim.cmd("highlight VirtColumn guifg=#00FF00")
 require("virt-column").setup({
-  column_number = 80,
-  overlay = false,
-  vert_char = "│",
-  enabled = true,
-  buftype_exclude = {"help", "nofile", "nowrite", "quickfix", "terminal", "prompt"},
-  filetype_exclude = {"netrw"},
+  virtcolumn = "80,120"
 })
-
